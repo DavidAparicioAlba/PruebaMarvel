@@ -1,4 +1,4 @@
-package com.example.pruebamarvel.data
+package com.example.pruebamarvel.data.remote
 
 import retrofit2.http.GET
 
