@@ -1,4 +1,4 @@
-package com.example.pruebamarvel
+package com.example.pruebamarvel.di
 
 import dagger.Module
 import dagger.Provides
