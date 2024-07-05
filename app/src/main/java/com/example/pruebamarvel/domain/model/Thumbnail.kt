@@ -5,5 +5,5 @@ data class Thumbnail(
     val extension: String
 ) {
     val fullPath: String
-        get() = "$path.$extension"
+        get() = "$path.$extension".replace("http:", "https:")
 }
