@@ -19,7 +19,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("marvelurl")
+            .baseUrl("https://gateway.marvel.com/v1/public/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
