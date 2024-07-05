@@ -18,9 +18,14 @@ class MainViewModel @Inject constructor(
     private val _data = MutableStateFlow<List<HeroModel>>(emptyList())
     val data: StateFlow<List<HeroModel>> get() = _data
 
-    fun fetchData() {
+    init {
+        fetchData()
+    }
+
+    private fun fetchData() {
         viewModelScope.launch {
-            _data.value = getDataUseCase.execute()
+            val result = getDataUseCase.execute()
+            _data.value = result
         }
     }
 }
