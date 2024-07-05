@@ -2,7 +2,7 @@ package com.example.pruebamarvel.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pruebamarvel.domain.model.DataModel
+import com.example.pruebamarvel.domain.model.HeroModel
 import com.example.pruebamarvel.domain.usecase.GetDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,8 +15,8 @@ class MainViewModel @Inject constructor(
     private val getDataUseCase: GetDataUseCase
 ) : ViewModel() {
 
-    private val _data = MutableStateFlow<List<DataModel>>(emptyList())
-    val data: StateFlow<List<DataModel>> get() = _data
+    private val _data = MutableStateFlow<List<HeroModel>>(emptyList())
+    val data: StateFlow<List<HeroModel>> get() = _data
 
     fun fetchData() {
         viewModelScope.launch {

@@ -1,7 +1,7 @@
 package com.example.pruebamarvel.domain.repository
 
-import com.example.pruebamarvel.domain.model.DataModel
+import com.example.pruebamarvel.domain.model.HeroModel
 
 interface Repository {
-    suspend fun getData(): List<DataModel>
+    suspend fun getData(): List<HeroModel>
 }
