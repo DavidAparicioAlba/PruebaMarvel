@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
@@ -38,23 +39,29 @@ import com.example.pruebamarvel.domain.model.HeroModel
 enum class SortOption { NAME, ID }
 
 @Composable
-fun CharacterList(data: List<HeroModel>, modifier: Modifier) {
+fun CharacterList(data: List<HeroModel>, modifier: Modifier, navController: NavController) {
     LazyColumn(
         modifier = modifier
     ) {
         items(data) { character ->
-            CharacterItem(character)
+            CharacterItem(character,
+                onClick = {
+                    navController.navigate("detail/${character.id}")
+                }
+            )
         }
     }
 }
 
 @Composable
-fun CharacterItem(character: HeroModel) {
+fun CharacterItem(character: HeroModel, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { /* Navigate to detail screen */ }
+            .clickable {
+                onClick()
+            }
     ) {
         val imageUrl = character.thumbnail.fullPath
         Image(
