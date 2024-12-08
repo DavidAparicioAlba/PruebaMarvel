@@ -1,9 +1,9 @@
 package com.example.pruebamarvel.data.repository
 
-import com.example.pruebamarvel.util.HashGenerator
 import com.example.pruebamarvel.data.remote.ApiService
 import com.example.pruebamarvel.domain.model.HeroModel
 import com.example.pruebamarvel.domain.repository.Repository
+import com.example.pruebamarvel.util.HashGenerator
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(

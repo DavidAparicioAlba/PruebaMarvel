@@ -78,7 +78,8 @@ fun SortMenu(onSortChange: (SortOption) -> Unit) {
             },
             text = {
                 Text("Sort by Name")
-            })
+            }
+        )
 
         DropdownMenuItem(
             onClick = {
@@ -87,6 +88,7 @@ fun SortMenu(onSortChange: (SortOption) -> Unit) {
             },
             text = {
                 Text("Sort by ID")
-            })
+            }
+        )
     }
 }

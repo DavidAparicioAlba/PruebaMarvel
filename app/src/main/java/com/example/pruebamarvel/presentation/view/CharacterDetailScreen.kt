@@ -24,7 +24,6 @@ import com.example.pruebamarvel.presentation.viewmodel.MainViewModel
 
 @Composable
 fun CharacterDetailScreen(viewModel: MainViewModel = hiltViewModel(), characterId: Int, navController: NavController) {
-
     val state by viewModel.data.collectAsState()
     val character = state.find { it.id == characterId }
 
