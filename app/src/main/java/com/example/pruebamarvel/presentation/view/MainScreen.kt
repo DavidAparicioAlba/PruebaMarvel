@@ -1,8 +1,10 @@
 package com.example.pruebamarvel.presentation.view
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.pruebamarvel.presentation.viewmodel.MainViewModel
@@ -27,7 +30,10 @@ import com.example.pruebamarvel.presentation.viewmodel.MainViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(viewModel: MainViewModel = hiltViewModel(), navController: NavController) {
+
     val data by viewModel.data.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
     var (sortedData, setSortedData) = rememberSaveable { mutableStateOf(data) }
 
     LaunchedEffect(data) {
@@ -51,11 +57,15 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel(), navController: NavCon
             )
         },
         content = { paddingValues ->
-            CharacterList(
-                data = sortedData,
-                modifier = Modifier.padding(paddingValues),
-                navController
-            )
+            when {
+                isLoading -> CircularProgressIndicator(modifier = Modifier.padding(paddingValues))
+                errorMessage != null -> Text(text = errorMessage.toString(), color = Color.Red, modifier = Modifier.padding(paddingValues).fillMaxSize())
+                else -> CharacterList(
+                    data = sortedData,
+                    modifier = Modifier.padding(paddingValues),
+                    navController
+                )
+            }
         }
     )
 }

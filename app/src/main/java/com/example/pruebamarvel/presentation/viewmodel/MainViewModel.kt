@@ -18,14 +18,27 @@ class MainViewModel @Inject constructor(
     private val _data = MutableStateFlow<List<HeroModel>>(emptyList())
     val data: StateFlow<List<HeroModel>> get() = _data
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage
+
     init {
         fetchData()
     }
 
     private fun fetchData() {
+        _isLoading.value = true
         viewModelScope.launch {
-            val result = getDataUseCase.execute()
-            _data.value = result
+            try {
+                val result = getDataUseCase.execute()
+                _data.value = result
+            } catch (e: Exception) {
+                _errorMessage.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 }
